@@ -2,7 +2,7 @@
 
 秉承98%AI生成的制作原则，博客介绍均使用GPT4o进行总结
 
-欢迎来到 **CJack的博客**（[cjack.cfd](http://www.cjack.cfd)）！这是由 **CJackHwang** 创建的个人博客，旨在分享多样的文章和生活经历。
+欢迎来到 **CJack的博客**（[新版地址](http://www.cjack.cfd)或[旧版地址](https://old-blog.cjack.cfd)）！这是由 **CJackHwang** 创建的个人博客，旨在分享多样的文章和生活经历。
 
 ## 📖 博客概述
 
