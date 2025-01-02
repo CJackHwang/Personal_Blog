@@ -73,17 +73,19 @@ const toggleContent = (index) => {
         const text = content.getAttribute('data-fulltext');
         content.textContent = '';
         let indexChar = 0;
+        const charsPerInterval = 40; // 每次添加的字符数
 
         const interval = setInterval(() => {
             if (indexChar < text.length) {
-                content.textContent += text.charAt(indexChar);
+                const nextChars = text.substr(indexChar, charsPerInterval);
+                content.textContent += nextChars;
                 content.style.maxHeight = content.scrollHeight + 'px'; // 动态调整最大高度
-                indexChar++;
+                indexChar += charsPerInterval; // 更新索引
             } else {
                 clearInterval(interval);
                 isAnimating = false;
             }
-        }, 1);
+        }, 50); // 调整这个值控制速度
 
         setTimeout(() => {
             content.style.maxHeight = content.scrollHeight + 'px';
