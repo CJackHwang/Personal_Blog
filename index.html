@@ -6,88 +6,105 @@
     <title>CJack's Blog</title>
     <link rel="stylesheet" href="https://ik.imagekit.io/cjack/OPPO%20Sans%20Medium/result.css?updatedAt=1733565886168">
     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <body>
+    <header>
+        <h1>CJack's Blog</h1>
+        <div class="subtitle">
+            98% Built by GPT4o
+        </div>
+        <nav>
+            <a href="#" id="homeLink">首页</a>
+            <a href="#" id="aboutLink">关于</a>
+            <a href="#" id="contactLink">联系</a>
+            <button id="toggleButton" title="切换暗黑/明亮模式">&#9789</button>
+        </nav>
+    </header>
 
-        <header>
-            <h1>CJack's Blog</h1>
-            <div class="subtitle">
-                98% Built by GPT4o
-            </div>
+    <main id="postList">
+        <!-- 文章列表将在这里生成 -->
+    </main>
+
+    <div id="introContent" style="display: none;">
+        <div class="intro-text" id="aboutContent">
+            <h2>＃关于</h2>
+
+            <h3>关于博客</h3>
             <p>
+                这是CJackHwang的个人博客，分享各种文章和生活。这个博客是我几乎没有进行任何手动编写代码的情况下，指导GPT4o进行开发的静态博客，基本完全从零开发且没有引用任何框架。
             </p>
-            <nav>
-                <a href="#" id="homeLink">首页</a>
-                <a href="#" id="aboutLink">关于</a>
-                <a href="#" id="contactLink">联系</a>
-                <button id="toggleButton" title="切换暗黑/明亮模式">&#9789</button>
-            </nav>
-        </header>
+            <p>
+                为了节约服务器成本，且便于管理，提高访问速度，在经过一系列考虑之下决定抛弃Typecho而重构博客是最好的做法。
+            </p>
+            <p>
+                由于域名续费价格过高，访问量极少而没有续费价值（cjack.cfd于2025年5月到期，续费价格12.8$），我目前要尽可能节约一切成本，因此域名后续可能将会改用年抛制度（可节约费用至1.20$/年）。
+            </p>
+            <p>
+                【2025年可能启用域名为cjack2025.cfd或cjackhwang.cfd】
+            </p>
 
-        <main id="postList">
-            <!-- 文章列表将在这里生成 -->
-        </main>
-
-        <div id="introContent" style="display: none;">
-            <div class="intro-text" id="aboutContent">
-                <h2>＃关于</h2>
-                <p>
-                    【关于博客】这是CJackHwang的个人博客，分享各种文章和生活。这个博客是我几乎没有进行任何手动编写代码的情况下，指导GPT4o进行开发的静态博客，基本完全从零开发且没有引用任何框架。为了节约服务器成本，且便于管理，提高访问速度，在经过一系列考虑之下决定抛弃Typecho而重构博客是最好的做法。由于域名续费价格过高，访问量极少而没有续费价值（cjack.cfd于2025年5月到期，续费价格12.8$），我目前要尽可能节约一切成本，因此域名后续可能将会改用年抛制度（可节约费用至1.20$/年）。【2025年可能启用域名为cjack2025.cfd或cjackhwang.cfd】
-                </p>
-                <p>
-                    【关于自己】一个真实内心很内耗且渴求甜甜的恋爱（划去）但从不会在表面有任何显露的高中生。爱好广泛，喜欢刷机，研究信息技术，时不时给生活创造些小惊喜，目前在学习kotlin开发。欢迎找我闲聊（）。
-                </p>
-            </div>
-            <div class="intro-text" id="contactContent">
-                <style>
-                    .contact-link {
-                        color: inherit;
-                        /* 使链接颜色与文本一致 */
-                        text-decoration: none;
-                        /* 去除下划线 */
-                    }
-                    .contact-link:hover {
-                        text-decoration: underline;
-                        /* 悬停时添加下划线 */
-                    }
-                    p {
-                        margin-bottom: 1.5em;
-                        /* 每个联系方式下空开一行 */
-                    }
-                </style>
-
-                <h2>＃联系</h2>
-                <p>
-                    您可以通过点击以下方式与我联系：
-                </p>
-                <p>
-                    【腾讯QQ】<a class="contact-link" href="tencent://message/?uin=2073782156">2073782156</a>
-                </p>
-                <p>
-                    【QQ邮箱】<a class="contact-link" href="mailto:cjackhwang@qq.com">cjackhwang@qq.com</a>
-                </p>
-                <p>
-                    【Gmail邮箱】<a class="contact-link" href="mailto:tetr20071102@gmail.com">tetr20071102@gmail.com</a>
-                </p>
-                <p>
-                    【X（Twitter）】<a class="contact-link" href="https://x.com/tetr5354?s=09">@tetr5354（CJACK.）</a>
-                </p>
-                <p>
-                    【GitHub】<a class="contact-link" href="https://github.com/CJackHwang">CJackHwang</a>
-                </p>
-
-            </div>
+            <h3>关于自己</h3>
+            <p>
+                一个真实内心很内耗且渴求甜甜的恋爱（划去）但从不会在表面有任何显露的高中生。
+            </p>
+            <p>
+                爱好广泛，喜欢刷机，研究信息技术，时不时给生活创造些小惊喜，目前在学习Kotlin开发。
+            </p>
+            <p>
+                欢迎找我闲聊（）。
+            </p>
         </div>
 
-        <footer>
-            <p>
-                &copy; 2024 CJackHwang. 保留所有权利.
-            </p>
-            <p>
-                <a class="contact-link" href="https://icp.gov.moe/?keyword=20241982" target="_blank" rel="noopener noreferrer">-萌ICP备20241982号-</a>
-            </p>
-        </footer>
+        <div class="intro-text" id="contactContent">
+            <style>
+                .contact-link {
+                    color: inherit;
+                    /* 使链接颜色与文本一致 */
+                    text-decoration: none;
+                    /* 去除下划线 */
+                }
+                .contact-link:hover {
+                    text-decoration: underline;
+                    /* 悬停时添加下划线 */
+                }
+                p {
+                    margin-bottom: 1.5em;
+                    /* 每个联系方式下空开一行 */
+                }
+            </style>
 
-        <script src="script.js"></script>
-    </body>
+            <h2>＃联系</h2>
+            <p>
+                您可以通过点击以下方式与我联系：
+            </p>
+            <p>
+                【腾讯QQ】<a class="contact-link" href="tencent://message/?uin=2073782156">2073782156</a>
+            </p>
+            <p>
+                【QQ邮箱】<a class="contact-link" href="mailto:cjackhwang@qq.com">cjackhwang@qq.com</a>
+            </p>
+            <p>
+                【Gmail邮箱】<a class="contact-link" href="mailto:tetr20071102@gmail.com">tetr20071102@gmail.com</a>
+            </p>
+            <p>
+                【X（Twitter）】<a class="contact-link" href="https://x.com/tetr5354?s=09">@tetr5354（CJACK.）</a>
+            </p>
+            <p>
+                【GitHub】<a class="contact-link" href="https://github.com/CJackHwang">CJackHwang</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            &copy; 2024 CJackHwang. 保留所有权利.
+        </p>
+        <p>
+            <a class="contact-link" href="https://icp.gov.moe/?keyword=20241982" target="_blank" rel="noopener noreferrer">-萌ICP备20241982号-</a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
