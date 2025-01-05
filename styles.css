@@ -14,7 +14,6 @@ body {
     color: #333;
     transition: background-color 0.3s, color 0.3s;
     font-size: 16px;
-    /* 固定基本字体大小 */
 }
 
 body.dark-mode {
@@ -25,28 +24,20 @@ body.dark-mode {
 header, footer {
     font-family: 'OPPO Sans Medium', sans-serif;
     font-weight: 300;
-}
-
-h1, h2 {
-    font-family: 'OPPO Sans Medium', sans-serif;
-    font-weight: 500;
-}
-
-.subtitle {
-    font-weight: 300;
-}
-
-header {
     padding: 40px 0;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-bottom: 3px solid #ccc;
     border-radius: 0 0 12px 12px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-mode header {
     background-color: #1f1f1f;
+}
+
+h1, h2 {
+    font-family: 'OPPO Sans Medium', sans-serif;
+    font-weight: 300;
 }
 
 h1 {
@@ -67,7 +58,6 @@ nav {
     border-radius: 12px;
     background-color: #f0f0f0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s;
 }
 
 body.dark-mode nav {
@@ -149,7 +139,6 @@ main {
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s;
 }
 
 body.dark-mode main {
@@ -206,17 +195,16 @@ footer {
     color: #333;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
     margin-top: auto;
-    height: 85px;
+    height: auto;
     font-size: 1rem;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 body.dark-mode footer {
     background-color: #1f1f1f;
     color: #fff;
 }
-
 
 footer:hover {
     transform: translateY(-5px);
@@ -284,4 +272,22 @@ button {
 
 button:focus, a:focus {
     outline: none;
+}
+
+.translateSelectLanguage {
+    padding: 5px 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+body.dark-mode .translateSelectLanguage {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #f0f0f0;
 }
