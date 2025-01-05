@@ -8,7 +8,7 @@ const contactContent = document.getElementById('contactContent');
 const setInitialTheme = () => {
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.body.classList.toggle('dark-mode', isDarkMode);
-    toggleButton.innerHTML = isDarkMode ? '&#9728;' : '&#9789'; // 太阳或月亮图标
+    toggleButton.innerHTML = isDarkMode ? '&#9728;': '&#9789;';
 };
 
 setInitialTheme();
@@ -16,8 +16,8 @@ setInitialTheme();
 // 切换主题
 toggleButton.addEventListener('click', () => {
     const isDarkMode = document.body.classList.toggle('dark-mode');
-    toggleButton.style.backgroundColor = isDarkMode ? '#333' : '#f0f0f0';
-    toggleButton.innerHTML = isDarkMode ? '&#9728;' : '&#9789';
+    toggleButton.style.backgroundColor = isDarkMode ? '#333': '#f0f0f0';
+    toggleButton.innerHTML = isDarkMode ? '&#9728;': '&#9789;';
     toggleButton.classList.add('rotate');
     setTimeout(() => toggleButton.classList.remove('rotate'), 600);
 });
@@ -26,7 +26,7 @@ toggleButton.addEventListener('click', () => {
 const fetchPostFiles = async () => {
     const response = await fetch('posts_list/list.txt');
     const text = await response.text();
-    return text.split('\n').map(file => file.trim()).filter(Boolean); // 过滤掉空行
+    return text.split('\n').map(file => file.trim()).filter(Boolean);
 };
 
 // 获取帖子内容
@@ -39,21 +39,33 @@ const fetchPost = async (file) => {
 // 解析帖子内容
 const parsePost = (text) => {
     const lines = text.split('\n').map(line => line.trim());
-    return { title: lines[0], meta: lines[1], content: lines.slice(2).join('\n').trim() };
+    return {
+        title: lines[0],
+        meta: lines[1],
+        content: lines.slice(2).join('\n').trim()
+    };
 };
 
-// 渲染帖子
+// 批量渲染帖子
 const renderPosts = (posts) => {
-    postList.innerHTML = posts.map((post, index) => `
-        <div class="post-card" onclick="toggleContent(${index})">
-            <h2>${post.title}</h2>
-            <p class="meta">${post.meta}</p>
-            <p class="content" id="content-${index}" style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;" data-fulltext="${post.content}"></p>
-        </div>
-    `).join('');
+    const fragment = document.createDocumentFragment();
+    posts.forEach((post, index) => {
+        const postCard = document.createElement('div');
+        postCard.className = 'post-card';
+        postCard.onclick = () => toggleContent(index);
+
+        postCard.innerHTML = `
+        <h2>${post.title}</h2>
+        <p class="meta">${post.meta}</p>
+        <p class="content" id="content-${index}" style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;" data-fulltext="${post.content}"></p>
+        `;
+
+        fragment.appendChild(postCard);
+    });
+    postList.appendChild(fragment);
 };
 
-let isAnimating = false; // 动画状态
+let isAnimating = false;
 
 // 切换帖子内容的可见性
 const toggleContent = (index) => {
@@ -83,18 +95,20 @@ const toggleContent = (index) => {
             if (indexChar < text.length) {
                 const nextChars = text.substr(indexChar, 40);
                 content.textContent += nextChars;
-                content.style.maxHeight = content.scrollHeight + 'px'; // 动态调整最大高度
+                content.style.maxHeight = content.scrollHeight + 'px';
                 indexChar += 40;
             } else {
                 clearInterval(interval);
                 isAnimating = false;
             }
-        }, 50);
+        },
+            50);
 
         setTimeout(() => {
             content.style.maxHeight = content.scrollHeight + 'px';
             content.style.opacity = '1';
-        }, 15);
+        },
+            15);
     }
 };
 
@@ -105,8 +119,9 @@ const fadeOut = (element, callback) => {
     element.style.opacity = '0';
     setTimeout(() => {
         element.style.display = 'none';
-        callback?.(); // 使用可选链
-    }, 150);
+        callback();
+    },
+        500);
 };
 
 // 淡入效果
@@ -116,38 +131,42 @@ const fadeIn = (element) => {
     element.style.transition = 'opacity 0.5s ease';
     setTimeout(() => {
         element.style.opacity = '1';
-    }, 200);
+    },
+        15);
 };
 
 // 导航事件处理程序
 const setupNavigation = () => {
-    document.getElementById('aboutLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        fadeOut(postList, () => {
-            introContent.style.display = 'block';
-            aboutContent.style.display = 'block';
-            contactContent.style.display = 'none';
-            fadeIn(introContent);
+    document.getElementById('aboutLink').addEventListener('click',
+        (e) => {
+            e.preventDefault();
+            fadeOut(postList, () => {
+                introContent.style.display = 'block';
+                aboutContent.style.display = 'block';
+                contactContent.style.display = 'none';
+                fadeIn(introContent);
+            });
         });
-    });
 
-    document.getElementById('contactLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        fadeOut(postList, () => {
-            introContent.style.display = 'block';
-            contactContent.style.display = 'block';
-            aboutContent.style.display = 'none';
-            fadeIn(introContent);
+    document.getElementById('contactLink').addEventListener('click',
+        (e) => {
+            e.preventDefault();
+            fadeOut(postList, () => {
+                introContent.style.display = 'block';
+                contactContent.style.display = 'block';
+                aboutContent.style.display = 'none';
+                fadeIn(introContent);
+            });
         });
-    });
 
-    document.getElementById('homeLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        fadeOut(introContent, () => {
-            postList.style.display = 'block';
-            fadeIn(postList);
+    document.getElementById('homeLink').addEventListener('click',
+        (e) => {
+            e.preventDefault();
+            fadeOut(introContent, () => {
+                postList.style.display = 'block';
+                fadeIn(postList);
+            });
         });
-    });
 };
 
 setupNavigation(); // 设置导航事件处理程序
