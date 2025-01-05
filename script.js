@@ -22,8 +22,12 @@ toggleButton.addEventListener('click', () => {
     setTimeout(() => toggleButton.classList.remove('rotate'), 600);
 });
 
-// 帖子文件名称
-const postFiles = ['博客公告栏.txt', '奖状生成器.txt', '中京东日.txt'];
+// 获取帖子文件列表
+const fetchPostFiles = async () => {
+    const response = await fetch('posts_list/list.txt');
+    const text = await response.text();
+    return text.split('\n').map(file => file.trim()).filter(file => file); // 过滤掉空行
+};
 
 // 获取帖子内容
 const fetchPost = async (file) => {
@@ -145,4 +149,6 @@ document.getElementById('homeLink').addEventListener('click', (e) => {
 });
 
 // 初始化帖子
-Promise.all(postFiles.map(fetchPost)).then(renderPosts);
+fetchPostFiles().then(postFiles => {
+    Promise.all(postFiles.map(fetchPost)).then(renderPosts);
+});
