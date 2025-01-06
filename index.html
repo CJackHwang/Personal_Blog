@@ -7,22 +7,15 @@
     <link rel="stylesheet" href="https://ik.imagekit.io/cjack/OPPO%20Sans%20Medium/result.css?updatedAt=1733565886168">
     <link rel="stylesheet" href="styles.css">
     <style>
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #f8f8f8;
-            border-top: 1px solid #eaeaea;
-        }
-        .footer-links {
-            margin: 10px 0;
-        }
-        .footer-links a {
-            margin: 0 10px;
+        .contact-link {
             color: inherit;
             text-decoration: none;
         }
-        .footer-links a:hover {
+        .contact-link:hover {
             text-decoration: underline;
+        }
+        p {
+            margin-bottom: 1.5em;
         }
     </style>
 </head>
@@ -32,8 +25,8 @@
         <h1>CJack's Blog</h1>
         <div class="subtitle">
             98% Built by GPT4o
-            <p></p>
         </div>
+        <p></p>
         <nav>
             <a href="#" id="homeLink">首页</a>
             <a href="#" id="aboutLink">关于</a>
@@ -41,6 +34,7 @@
             <button id="toggleButton" title="切换暗黑/明亮模式">&#9789</button>
         </nav>
     </header>
+
     <main id="postList">
         <!-- 文章列表将在这里生成 -->
     </main>
@@ -68,18 +62,6 @@
         </div>
 
         <div class="intro-text" id="contactContent">
-            <style>
-                .contact-link {
-                    color: inherit;
-                    text-decoration: none;
-                }
-                .contact-link:hover {
-                    text-decoration: underline;
-                }
-                p {
-                    margin-bottom: 1.5em;
-                }
-            </style>
             <h2>＃联系</h2>
             <h3>您可以通过点击以下方式与我联系：</h3>
             <p>
@@ -101,7 +83,6 @@
     </div>
 
     <footer>
-
         <p>
             &copy; 2024-2025 CJackHwang. 保留所有权利.
         </p>
@@ -111,6 +92,7 @@
         </div>
         <div id="translate"></div>
     </footer>
+
     <script src="script.js"></script>
     <script src="https://res.zvo.cn/translate/translate.js"></script>
     <script>
@@ -118,7 +100,7 @@
         translate.setAutoDiscriminateLocalLanguage();
         translate.setUseVersion2();
         translate.selectLanguageTag.languages = 'english,chinese_simplified,chinese_traditional,japanese,korean';
-        translate.ignore.tag.push('h1')
+        translate.ignore.tag.push('h1');
         translate.execute();
     </script>
 </body>

@@ -191,13 +191,13 @@ body.dark-mode .meta {
 
 footer {
     text-align: center;
-    background-color: #fff;
+    padding: 15px;
+    background-color: #f8f8f8;
     color: #333;
+    border-top: 1px solid #eaeaea;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: auto;
-    height: auto;
-    font-size: 1rem;
     transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -215,14 +215,18 @@ footer p {
     font-size: 0.9rem;
 }
 
-footer a {
-    color: #007BFF;
-    text-decoration: none;
-    transition: color 0.3s;
+.footer-links {
+    margin: 10px 0;
 }
 
-footer a:hover {
-    color: #0056b3;
+.footer-links a {
+    margin: 0 10px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }
 
 #introContent {
@@ -281,7 +285,6 @@ button:focus, a:focus {
     background-color: #f0f0f0;
     color: #333;
     font-weight: 500;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s, transform 0.3s;
     cursor: pointer;
 }
