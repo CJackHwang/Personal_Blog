@@ -80,7 +80,6 @@ const displayPosts = (posts) => {
 
 let isAnimating = false;
 
-// 通用的内容切换函数
 const toggleContent = (index) => {
     const content = document.getElementById(`content-${index}`);
     const isVisible = content.style.maxHeight !== '0px';
@@ -95,21 +94,26 @@ const toggleContent = (index) => {
             const text = decodeURIComponent(content.getAttribute('data-fulltext'));
             content.innerHTML = text;
 
-            // 等待图片加载完成
+            // 初步展开文本
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.opacity = '1';
+
+            // 先显示文本，延迟图片加载
             const images = content.getElementsByTagName('img');
             let loadedImages = 0;
 
             const checkImagesLoaded = () => {
                 loadedImages++;
                 if (loadedImages === images.length) {
+                    // 所有图片加载完成后调整高度
                     content.style.maxHeight = content.scrollHeight + 'px';
-                    content.style.opacity = '1';
                 }
             };
 
+            // 加载图片
             if (images.length === 0) {
+                // 如果没有图片，直接设置最大高度
                 content.style.maxHeight = content.scrollHeight + 'px';
-                content.style.opacity = '1';
             } else {
                 for (let img of images) {
                     img.onload = checkImagesLoaded;
@@ -130,6 +134,7 @@ const toggleContent = (index) => {
         isAnimating = false;
     }, 500);
 };
+
 
 // 加载帖子并渲染
 const loadPosts = async () => {
