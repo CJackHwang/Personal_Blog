@@ -12,4 +12,4 @@
 - 更换了服务器：
   [【国外通道】](https://jzbuilder.vercel.app/)
   [【国内通道】](https://jzbuilder.1145141919810.cfd/)
-更多内容请前往我的 [GitHub主页](https://github.com/CJackHwang/Certificate-generator) 查看项目详细信息。
+更多内容请前往 [GitHub仓库](https://github.com/CJackHwang/Certificate-generator) 查看项目详细信息。
