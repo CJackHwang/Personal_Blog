@@ -251,6 +251,12 @@ footer p {
     text-decoration: underline;
 }
 
+/* 新增：强制卡片内容的链接使用下划线 */
+.post-card .footer-links a {
+    text-decoration: underline;
+    /* 强制下划线 */
+}
+
 #introContent {
     margin: 20px 0;
 }
