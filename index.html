@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CJack's Blog - 分享各种文章和生活的个人博客。">
+    <meta name="keywords" content="博客, 个人, CJackHwang, 技术, 生活">
     <title>CJack's Blog</title>
-    <link rel="stylesheet" href="https://ik.imagekit.io/cjack/OPPO%20Sans%20Medium/result.css?updatedAt=1733565886168">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://ik.imagekit.io/cjack/OPPO%20Sans%20Medium/result.css?updatedAt=1733565886168">
 </head>
 <body>
 
@@ -15,6 +17,7 @@
             98% Built by GPT4o
         </div>
         <p></p>
+        <!-- 空段落以增加间距 -->
         <nav>
             <a href="#" id="homeLink">首页</a>
             <a href="#" id="aboutLink">关于</a>
@@ -28,9 +31,9 @@
         <script src="js/marked.min.js"></script>
     </main>
 
-    <div id="introContent" style="display: none;">
-        <section class="intro-text" id="aboutContent">
-            <h2>『关于』</h2>
+    <section id="introContent" style="display: none;">
+        <article class="intro-text" id="aboutContent">
+            <h2>关于</h2>
             <h3>关于博客</h3>
             <p>
                 这是CJackHwang的个人博客，分享各种文章和生活。这个博客是我几乎没有进行任何手动编写代码的情况下，指导GPT4o进行开发的静态博客，基本完全从零开发且没有引用任何框架。
@@ -42,10 +45,10 @@
             <p>
                 欢迎找我闲聊（）。
             </p>
-        </section>
+        </article>
 
-        <section class="intro-text" id="contactContent">
-            <h2>『联系』</h2>
+        <article class="intro-text" id="contactContent">
+            <h2>联系</h2>
             <h3>您可以通过点击以下方式与我联系：</h3>
             <p>
                 【腾讯QQ】<a class="contact-link" href="tencent://message/?uin=2073782156&Site=&Menu=yes">2073782156（点击跳转）</a>
@@ -62,8 +65,8 @@
             <p>
                 【GitHub】<a class="contact-link" href="https://github.com/CJackHwang">CJackHwang</a>
             </p>
-        </section>
-    </div>
+        </article>
+    </section>
 
     <footer>
         <p>
@@ -79,6 +82,7 @@
     <script src="js/script.js"></script>
     <script src="https://res.zvo.cn/translate/translate.js"></script>
     <script>
+        // 语言翻译设置
         translate.ignore.class.push('test');
         translate.setAutoDiscriminateLocalLanguage();
         translate.setUseVersion2();
