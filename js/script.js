@@ -19,6 +19,7 @@ toggleButton.addEventListener('click', () => {
     toggleButton.style.backgroundColor = isDarkMode ? '#333': '#f0f0f0';
     toggleButton.innerHTML = isDarkMode ? '&#9728;': '&#9789;';
     toggleButton.classList.add('rotate');
+
     setTimeout(() => toggleButton.classList.remove('rotate'), 600);
 });
 
@@ -52,6 +53,7 @@ const parsePost = (text) => {
     const [title,
         meta,
         ...contentLines] = lines;
+
     return {
         title,
         meta,
@@ -59,33 +61,104 @@ const parsePost = (text) => {
     };
 };
 
-// 批量渲染帖子
+// 分页显示帖子
 const displayPosts = (posts) => {
-    const fragment = document.createDocumentFragment();
-    posts.forEach((post, index) => {
-        if (post) {
-            const postCard = document.createElement('div');
-            postCard.className = 'post-card';
-            postCard.onclick = () => toggleContent(index);
-            postCard.innerHTML = `
-            <h2>${post.title}</h2>
-            <p class="meta">${post.meta}</p>
-            <div class="content" id="content-${index}" style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;" data-fulltext="${encodeURIComponent(post.content)}"></div>
-            `;
-            fragment.appendChild(postCard);
+    const postsPerPage = 4;
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const pagination = document.createElement('div');
+    pagination.className = 'pagination';
+
+    const showPage = (page) => {
+        postList.style.transition = 'opacity 0.5s ease'; // 添加过渡效果
+        postList.style.opacity = '0'; // 先将当前内容渐隐
+
+        setTimeout(() => {
+            postList.innerHTML = ''; // 清空当前内容
+            const start = (page - 1) * postsPerPage;
+            const end = start + postsPerPage;
+
+            const fragment = document.createDocumentFragment();
+            posts.slice(start, end).forEach((post, index) => {
+                if (post) {
+                    const postCard = document.createElement('div');
+                    postCard.className = 'post-card';
+                    postCard.onclick = () => toggleContent(start + index);
+                    postCard.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p class="meta">${post.meta}</p>
+                    <div class="content" id="content-${start + index}"
+                    style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;"
+                    data-fulltext="${encodeURIComponent(post.content)}"></div>
+                    `;
+                    fragment.appendChild(postCard);
+                }
+            });
+
+            postList.appendChild(fragment);
+            updatePagination(page);
+            postList.style.opacity = '1'; // 渐显新内容
+        }, 500); // 与fade-out时间一致
+    };
+
+    const updatePagination = (currentPage) => {
+        pagination.innerHTML = '';
+
+        // 首页按钮
+        const firstButton = document.createElement('button');
+        firstButton.innerText = '首页';
+        firstButton.onclick = () => showPage(1);
+        pagination.appendChild(firstButton);
+
+        // 动态中间页码按钮
+        const pageButtons = [];
+        const startPage = Math.max(1, currentPage - 1);
+        const endPage = Math.min(totalPages, currentPage + 1);
+
+        for (let i = startPage; i <= endPage; i++) {
+            if (i <= totalPages) {
+                const button = document.createElement('button');
+                button.innerText = i;
+                button.onclick = () => showPage(i);
+                if (i === currentPage) {
+                    button.classList.add('active'); // 高亮当前页
+                }
+                pageButtons.push(button);
+            }
         }
-    });
-    postList.appendChild(fragment);
+
+        // 确保至少有一个数字按钮
+        if (pageButtons.length === 0) {
+            const fallbackButton = document.createElement('button');
+            fallbackButton.innerText = '1';
+            fallbackButton.onclick = () => showPage(1);
+            pageButtons.push(fallbackButton);
+        }
+
+        // 添加中间页码按钮
+        pageButtons.forEach(button => pagination.appendChild(button));
+
+        // 尾页按钮
+        if (totalPages > 1) {
+            const lastButton = document.createElement('button');
+            lastButton.innerText = '尾页';
+            lastButton.onclick = () => showPage(totalPages);
+            pagination.appendChild(lastButton);
+        }
+
+        postList.appendChild(pagination);
+    };
+
+    showPage(1); // 默认显示第一页
 };
 
 let isAnimating = false;
 
+// 切换帖子内容显示
 const toggleContent = (index) => {
     const content = document.getElementById(`content-${index}`);
     const isVisible = content.style.maxHeight !== '0px';
 
     if (isAnimating) return;
-
     isAnimating = true;
 
     const toggleAnimation = (show) => {
@@ -94,26 +167,24 @@ const toggleContent = (index) => {
             const text = decodeURIComponent(content.getAttribute('data-fulltext'));
             content.innerHTML = text;
 
-            // 初步展开文本
-            content.style.maxHeight = content.scrollHeight + 'px';
+            // 初步展开文本并缓存高度
+            const fullHeight = content.scrollHeight;
+            content.style.maxHeight = `${fullHeight}px`;
             content.style.opacity = '1';
 
-            // 先显示文本，延迟图片加载
+            // 加载图片
             const images = content.getElementsByTagName('img');
             let loadedImages = 0;
 
             const checkImagesLoaded = () => {
                 loadedImages++;
                 if (loadedImages === images.length) {
-                    // 所有图片加载完成后调整高度
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.maxHeight = `${content.scrollHeight}px`;
                 }
             };
 
-            // 加载图片
             if (images.length === 0) {
-                // 如果没有图片，直接设置最大高度
-                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.maxHeight = `${fullHeight}px`;
             } else {
                 for (let img of images) {
                     img.onload = checkImagesLoaded;
@@ -135,12 +206,17 @@ const toggleContent = (index) => {
     }, 500);
 };
 
-
 // 加载帖子并渲染
 const loadPosts = async () => {
     const postFiles = await getPostFileList();
-    const posts = await Promise.all(postFiles.map(fetchPost));
-    displayPosts(posts.filter(post => post));
+    const posts = [];
+
+    for (let file of postFiles) {
+        const post = await fetchPost(file);
+        if (post) posts.push(post);
+    }
+
+    displayPosts(posts);
 };
 
 // 导航事件处理程序
