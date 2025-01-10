@@ -1,13 +1,22 @@
 :root {
+    /* 颜色变量 */
     --bg-color: #fff;
+    /* 默认背景色 */
     --text-color: #333;
+    /* 默认文本色 */
     --dark-bg-color: #121212;
+    /* 深色模式背景色 */
     --dark-text-color: #fff;
+    /* 深色模式文本色 */
     --primary-border: #ccc;
+    /* 默认边框色 */
     --primary-hover: #f0f0f0;
+    /* 悬停背景色 */
     --shadow-color: rgba(0, 0, 0, 0.2);
+    /* 阴影颜色 */
 }
 
+/* 全局重置和盒模型设置 */
 * {
     box-sizing: border-box;
 }
@@ -25,14 +34,15 @@ body {
     transition: background-color 0.3s, color 0.3s;
     font-size: 16px;
     line-height: normal;
-    /* 使用浏览器默认行间距 */
 }
 
+/* 深色模式 */
 body.dark-mode {
     background-color: var(--dark-bg-color);
     color: var(--dark-text-color);
 }
 
+/* 头部、底部和导航样式 */
 header, footer, nav {
     font-family: 'OPPO Sans Medium', sans-serif;
     font-weight: 300;
@@ -42,18 +52,23 @@ header, footer, nav {
     border-radius: 0 0 12px 12px;
 }
 
+header {
+    background-color: var(--primary-hover);
+}
+
 body.dark-mode header {
     background-color: #1f1f1f;
 }
 
+/* 标题样式 */
 h1, h2 {
     font-family: 'OPPO Sans Medium', sans-serif;
     font-weight: 300;
+    margin: 0;
     transition: transform 0.3s;
 }
 
 h1 {
-    margin: 0;
     font-size: 2.5rem;
 }
 
@@ -61,6 +76,7 @@ h1:hover {
     transform: translateY(-2px);
 }
 
+/* 导航样式 */
 nav {
     display: flex;
     justify-content: center;
@@ -115,6 +131,7 @@ nav a:hover::after {
     width: 100%;
 }
 
+/* 切换按钮样式 */
 #toggleButton {
     width: 40px;
     height: 40px;
@@ -142,6 +159,7 @@ body.dark-mode #toggleButton {
     transform: translateY(-5px);
 }
 
+/* 主内容区样式 */
 main {
     flex: 1;
     max-width: 800px;
@@ -156,9 +174,10 @@ body.dark-mode main {
     background: #1e1e1e;
 }
 
-.post-card, #introContent .intro-text {
+/* 帖子卡片样式 */
+.post-card, .intro-text {
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
     background-color: #f9f9f9;
     border: 1px solid #f9f9f9;
@@ -167,16 +186,17 @@ body.dark-mode main {
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-body.dark-mode .post-card, body.dark-mode #introContent .intro-text {
+body.dark-mode .post-card, body.dark-mode .intro-text {
     border: 1px solid #f0f0f0;
     background-color: #2a2a2a;
 }
 
-.post-card:hover, #introContent .intro-text:hover {
+.post-card:hover, .intro-text:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     transform: translateY(-5px);
 }
 
+/* 内容展开效果 */
 .content {
     max-height: 0;
     overflow: hidden;
@@ -188,7 +208,7 @@ body.dark-mode .post-card, body.dark-mode #introContent .intro-text {
 
 .content.show {
     max-height: 500px;
-    /* 可以根据内容调整 */
+    /* 根据内容调整 */
     opacity: 1;
 }
 
@@ -196,9 +216,7 @@ body.dark-mode .post-card, body.dark-mode #introContent .intro-text {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    /* 调整圆角大小 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* 可选：添加阴影效果 */
 }
 
 .meta {
@@ -210,6 +228,7 @@ body.dark-mode .meta {
     color: #ccc;
 }
 
+/* 底部样式 */
 footer {
     text-align: center;
     padding: 15px;
@@ -236,7 +255,7 @@ footer p {
     font-size: 0.9rem;
 }
 
-.footer-links {
+.footer-links, .contact-link {
     margin: 10px 0;
 }
 
@@ -251,31 +270,23 @@ footer p {
     text-decoration: underline;
 }
 
-/* 新增：强制卡片内容的链接使用下划线 */
-.post-card .footer-links a {
+/* 强制下划线样式 */
+.post-card a {
     text-decoration: underline;
     /* 强制下划线 */
 }
 
+.post-card a:hover {
+    text-decoration: underline;
+    /* 悬停时保持下划线 */
+}
+
+/* 介绍内容样式 */
 #introContent {
     margin: 20px 0;
 }
 
-.intro-text {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    border: 1px solid #f9f9f9;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-}
-
-body.dark-mode #introContent .intro-text {
-    border: 1px solid #f0f0f0;
-    background-color: #2a2a2a;
-}
-
+/* 响应式设计 */
 @media (max-width: 600px) {
     main {
         margin: 10px;
@@ -287,11 +298,13 @@ body.dark-mode #introContent .intro-text {
     }
 }
 
+/* 旋转效果 */
 .rotate {
     transition: transform 0.6s;
     transform: rotate(360deg);
 }
 
+/* 按钮焦点样式 */
 button {
     cursor: pointer;
 }
@@ -300,6 +313,7 @@ button:focus, a:focus {
     outline: none;
 }
 
+/* 语言选择按钮样式 */
 .translateSelectLanguage {
     padding: 5px 20px;
     border: 1px solid var(--primary-border);
@@ -315,4 +329,83 @@ body.dark-mode .translateSelectLanguage {
     background-color: #333;
     color: var(--dark-text-color);
     border: 1px solid #f0f0f0;
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* 上边距 */
+}
+
+.pagination button {
+    margin: 0 5px;
+    /* 左右边距 */
+    padding: 10px 15px;
+    /* 内边距 */
+    border: 1px solid var(--primary-border);
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: #f9f9f9;
+    /* 默认背景色 */
+    color: var(--text-color);
+    /* 默认文本颜色 */
+    font-weight: 500;
+    /* 字体加粗 */
+    cursor: pointer;
+    /* 鼠标指针 */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    /* 过渡效果 */
+    box-shadow: 0 4px 15px var(--shadow-color);
+    /* 阴影效果 */
+}
+
+/* 深色模式分页样式 */
+body.dark-mode .pagination button {
+    background-color: #2a2a2a;
+    /* 深色模式背景 */
+    color: var(--dark-text-color);
+    /* 深色模式文本颜色 */
+    border: 1px solid #f0f0f0;
+    /* 深色模式边框颜色 */
+}
+
+.pagination button:hover {
+    background-color: #e0e0e0;
+    /* 悬停背景 */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    /* 悬停阴影 */
+    transform: translateY(-3px);
+    /* 悬停提升效果 */
+}
+
+body.dark-mode .pagination button:hover {
+    background-color: #444;
+    /* 深色模式悬停背景 */
+}
+
+/* 高亮当前按钮样式 */
+.pagination button.active {
+    background-color: #666;
+    /* 高亮背景色 */
+    color: #fff;
+    /* 高亮文字色 */
+    box-shadow: none;
+    /* 可选：去掉阴影 */
+}
+
+/* 深色模式高亮按钮样式 */
+body.dark-mode .pagination button.active {
+    background-color: #fff;
+    /* 深色模式下高亮背景 */
+    color: #444;
+    /* 深色模式下高亮文字色 */
+}
+
+/* 针对按钮的最后一个元素去掉右边距 */
+.pagination button:last-child {
+    margin-right: 0;
+    /* 最后一个按钮不需要右边距 */
 }
