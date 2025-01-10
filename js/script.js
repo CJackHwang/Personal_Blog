@@ -1,4 +1,3 @@
-// 获取页面元素
 const toggleButton = document.getElementById('toggleButton');
 const postList = document.getElementById('postList');
 const introContent = document.getElementById('introContent');
@@ -11,11 +10,7 @@ const setInitialTheme = () => {
     toggleButton.innerHTML = isDarkMode ? '&#9728;': '&#9789;';
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    setInitialTheme(); // 设置初始主题
-    setupNavigation(); // 设置导航
-    loadPosts(); // 加载帖子
-});
+setInitialTheme();
 
 toggleButton.addEventListener('click', () => {
     const isDarkMode = document.body.classList.toggle('dark-mode');
@@ -62,24 +57,9 @@ const parsePost = (text) => {
     };
 };
 
-const loadPosts = async () => {
-    const postFiles = await getPostFileList(); // 获取帖子文件列表
-    const postsPromises = postFiles.map(fetchPost); // 获取帖子内容
-
-    // 按批次加载帖子以优化性能
-    const posts = [];
-    const batchSize = 4; // 每次加载4个帖子
-    for (let i = 0; i < postsPromises.length; i += batchSize) {
-        const batch = postsPromises.slice(i, i + batchSize);
-        const results = await Promise.all(batch);
-        posts.push(...results.filter(Boolean)); // 过滤掉无效的帖子
-        displayPosts(posts); // 更新帖子显示
-    }
-};
-
 const displayPosts = (posts) => {
-    const postsPerPage = 4; // 每页显示的帖子数量
-    const totalPages = Math.ceil(posts.length / postsPerPage); // 计算总页数
+    const postsPerPage = 4;
+    const totalPages = Math.ceil(posts.length / postsPerPage);
     const pagination = document.createElement('div');
     pagination.className = 'pagination';
 
@@ -88,7 +68,7 @@ const displayPosts = (posts) => {
         postList.style.opacity = '0';
 
         setTimeout(() => {
-            postList.innerHTML = ''; // 清空当前帖子
+            postList.innerHTML = '';
             const start = (page - 1) * postsPerPage;
             const end = start + postsPerPage;
 
@@ -108,7 +88,7 @@ const displayPosts = (posts) => {
             });
 
             postList.appendChild(fragment);
-            updatePagination(page); // 更新分页
+            updatePagination(page);
             postList.style.opacity = '1';
         }, 500);
     };
@@ -119,6 +99,7 @@ const displayPosts = (posts) => {
         const firstButton = createPaginationButton('首页', () => showPage(1));
         pagination.appendChild(firstButton);
 
+        const pageButtons = [];
         const startPage = Math.max(1, currentPage - 1);
         const endPage = Math.min(totalPages, currentPage + 1);
 
@@ -126,9 +107,16 @@ const displayPosts = (posts) => {
             if (i <= totalPages) {
                 const button = createPaginationButton(i, () => showPage(i));
                 if (i === currentPage) button.classList.add('active');
-                pagination.appendChild(button);
+                pageButtons.push(button);
             }
         }
+
+        if (pageButtons.length === 0) {
+            const fallbackButton = createPaginationButton('1', () => showPage(1));
+            pageButtons.push(fallbackButton);
+        }
+
+        pageButtons.forEach(button => pagination.appendChild(button));
 
         if (totalPages > 1) {
             const lastButton = createPaginationButton('尾页', () => showPage(totalPages));
@@ -145,7 +133,7 @@ const displayPosts = (posts) => {
         return button;
     };
 
-    showPage(1); // 加载第一页的帖子
+    showPage(1);
 };
 
 let isAnimating = false;
@@ -153,6 +141,7 @@ let isAnimating = false;
 const toggleContent = (index) => {
     const content = document.getElementById(`content-${index}`);
     const isVisible = content.style.maxHeight !== '0px';
+
     if (isAnimating) return;
     isAnimating = true;
 
@@ -166,26 +155,22 @@ const toggleContent = (index) => {
             content.style.maxHeight = `${fullHeight}px`;
             content.style.opacity = '1';
 
-            // 处理图片加载完成后的高度更新
             const images = content.getElementsByTagName('img');
+            let loadedImages = 0;
+
+            const checkImagesLoaded = () => {
+                loadedImages++;
+                if (loadedImages === images.length) {
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                }
+            };
+
             if (images.length === 0) {
                 content.style.maxHeight = `${fullHeight}px`;
             } else {
-                let loadedImages = 0;
-                const checkImagesLoaded = () => {
-                    loadedImages++;
-                    if (loadedImages === images.length) {
-                        content.style.maxHeight = `${content.scrollHeight}px`;
-                    }
-                };
-
                 for (let img of images) {
-                    if (img.complete) {
-                        checkImagesLoaded(); // 如果图片已加载，立即检查
-                    } else {
-                        img.onload = checkImagesLoaded;
-                        img.onerror = checkImagesLoaded;
-                    }
+                    img.onload = checkImagesLoaded;
+                    img.onerror = checkImagesLoaded;
                 }
             }
         } else {
@@ -197,10 +182,17 @@ const toggleContent = (index) => {
         }
     };
 
-    toggleAnimation(!isVisible); // 切换显示状态
+    toggleAnimation(!isVisible);
     setTimeout(() => {
-        isAnimating = false; // 动画结束
+        isAnimating = false;
     }, 500);
+};
+
+const loadPosts = async () => {
+    const postFiles = await getPostFileList();
+    const postsPromises = postFiles.map(fetchPost);
+    const posts = await Promise.all(postsPromises);
+    displayPosts(posts.filter(Boolean));
 };
 
 const setupNavigation = () => {
@@ -258,4 +250,5 @@ const setupNavigation = () => {
     });
 };
 
-setupNavigation(); // 设置导航
+setupNavigation();
+loadPosts();
