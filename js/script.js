@@ -4,7 +4,6 @@ const introContent = document.getElementById('introContent');
 const aboutContent = document.getElementById('aboutContent');
 const contactContent = document.getElementById('contactContent');
 
-// 根据用户偏好初始化主题
 const setInitialTheme = () => {
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -13,7 +12,6 @@ const setInitialTheme = () => {
 
 setInitialTheme();
 
-// 切换主题
 toggleButton.addEventListener('click', () => {
     const isDarkMode = document.body.classList.toggle('dark-mode');
     toggleButton.style.backgroundColor = isDarkMode ? '#333': '#f0f0f0';
@@ -23,31 +21,29 @@ toggleButton.addEventListener('click', () => {
     setTimeout(() => toggleButton.classList.remove('rotate'), 600);
 });
 
-// 获取帖子文件列表
 const getPostFileList = async () => {
     try {
         const response = await fetch('posts_list/list.txt');
         const text = await response.text();
         return text.split('\n').map(file => file.trim()).filter(Boolean);
     } catch (error) {
-        console.error('Failed to fetch post files:', error);
+        console.error('获取帖子文件失败:', error);
         return [];
     }
 };
 
-// 获取帖子内容
 const fetchPost = async (file) => {
     try {
         const response = await fetch(`posts/${file}`);
+        if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
         const data = await response.text();
         return parsePost(data);
     } catch (error) {
-        console.error(`Failed to fetch post: ${file}`, error);
-        return null; // 返回 null 以处理不完整的帖子
+        console.error(`获取帖子失败: ${file}`, error);
+        return null;
     }
 };
 
-// 解析帖子内容
 const parsePost = (text) => {
     const lines = text.split('\n').map(line => line.trim());
     const [title,
@@ -61,7 +57,6 @@ const parsePost = (text) => {
     };
 };
 
-// 分页显示帖子
 const displayPosts = (posts) => {
     const postsPerPage = 4;
     const totalPages = Math.ceil(posts.length / postsPerPage);
@@ -69,11 +64,11 @@ const displayPosts = (posts) => {
     pagination.className = 'pagination';
 
     const showPage = (page) => {
-        postList.style.transition = 'opacity 0.5s ease'; // 添加过渡效果
-        postList.style.opacity = '0'; // 先将当前内容渐隐
+        postList.style.transition = 'opacity 0.5s ease';
+        postList.style.opacity = '0';
 
         setTimeout(() => {
-            postList.innerHTML = ''; // 清空当前内容
+            postList.innerHTML = '';
             const start = (page - 1) * postsPerPage;
             const end = start + postsPerPage;
 
@@ -86,9 +81,7 @@ const displayPosts = (posts) => {
                     postCard.innerHTML = `
                     <h2>${post.title}</h2>
                     <p class="meta">${post.meta}</p>
-                    <div class="content" id="content-${start + index}"
-                    style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;"
-                    data-fulltext="${encodeURIComponent(post.content)}"></div>
+                    <div class="content" id="content-${start + index}" style="display: none; opacity: 0; max-height: 0; transition: max-height 0.5s ease, opacity 0.5s ease;" data-fulltext="${encodeURIComponent(post.content)}"></div>
                     `;
                     fragment.appendChild(postCard);
                 }
@@ -96,64 +89,55 @@ const displayPosts = (posts) => {
 
             postList.appendChild(fragment);
             updatePagination(page);
-            postList.style.opacity = '1'; // 渐显新内容
-        }, 500); // 与fade-out时间一致
+            postList.style.opacity = '1';
+        }, 500);
     };
 
     const updatePagination = (currentPage) => {
         pagination.innerHTML = '';
 
-        // 首页按钮
-        const firstButton = document.createElement('button');
-        firstButton.innerText = '首页';
-        firstButton.onclick = () => showPage(1);
+        const firstButton = createPaginationButton('首页', () => showPage(1));
         pagination.appendChild(firstButton);
 
-        // 动态中间页码按钮
         const pageButtons = [];
         const startPage = Math.max(1, currentPage - 1);
         const endPage = Math.min(totalPages, currentPage + 1);
 
         for (let i = startPage; i <= endPage; i++) {
             if (i <= totalPages) {
-                const button = document.createElement('button');
-                button.innerText = i;
-                button.onclick = () => showPage(i);
-                if (i === currentPage) {
-                    button.classList.add('active'); // 高亮当前页
-                }
+                const button = createPaginationButton(i, () => showPage(i));
+                if (i === currentPage) button.classList.add('active');
                 pageButtons.push(button);
             }
         }
 
-        // 确保至少有一个数字按钮
         if (pageButtons.length === 0) {
-            const fallbackButton = document.createElement('button');
-            fallbackButton.innerText = '1';
-            fallbackButton.onclick = () => showPage(1);
+            const fallbackButton = createPaginationButton('1', () => showPage(1));
             pageButtons.push(fallbackButton);
         }
 
-        // 添加中间页码按钮
         pageButtons.forEach(button => pagination.appendChild(button));
 
-        // 尾页按钮
         if (totalPages > 1) {
-            const lastButton = document.createElement('button');
-            lastButton.innerText = '尾页';
-            lastButton.onclick = () => showPage(totalPages);
+            const lastButton = createPaginationButton('尾页', () => showPage(totalPages));
             pagination.appendChild(lastButton);
         }
 
         postList.appendChild(pagination);
     };
 
-    showPage(1); // 默认显示第一页
+    const createPaginationButton = (text, onClick) => {
+        const button = document.createElement('button');
+        button.innerText = text;
+        button.onclick = onClick;
+        return button;
+    };
+
+    showPage(1);
 };
 
 let isAnimating = false;
 
-// 切换帖子内容显示
 const toggleContent = (index) => {
     const content = document.getElementById(`content-${index}`);
     const isVisible = content.style.maxHeight !== '0px';
@@ -167,12 +151,10 @@ const toggleContent = (index) => {
             const text = decodeURIComponent(content.getAttribute('data-fulltext'));
             content.innerHTML = text;
 
-            // 初步展开文本并缓存高度
             const fullHeight = content.scrollHeight;
             content.style.maxHeight = `${fullHeight}px`;
             content.style.opacity = '1';
 
-            // 加载图片
             const images = content.getElementsByTagName('img');
             let loadedImages = 0;
 
@@ -188,7 +170,7 @@ const toggleContent = (index) => {
             } else {
                 for (let img of images) {
                     img.onload = checkImagesLoaded;
-                    img.onerror = checkImagesLoaded; // 确保即使加载失败也能继续
+                    img.onerror = checkImagesLoaded;
                 }
             }
         } else {
@@ -206,20 +188,13 @@ const toggleContent = (index) => {
     }, 500);
 };
 
-// 加载帖子并渲染
 const loadPosts = async () => {
     const postFiles = await getPostFileList();
-    const posts = [];
-
-    for (let file of postFiles) {
-        const post = await fetchPost(file);
-        if (post) posts.push(post);
-    }
-
-    displayPosts(posts);
+    const postsPromises = postFiles.map(fetchPost);
+    const posts = await Promise.all(postsPromises);
+    displayPosts(posts.filter(Boolean));
 };
 
-// 导航事件处理程序
 const setupNavigation = () => {
     const fadeElements = {
         intro: introContent,
