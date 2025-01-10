@@ -162,7 +162,7 @@ body.dark-mode #toggleButton {
 /* 主内容区样式 */
 main {
     flex: 1;
-    max-width: 800px;
+    max-width: auto;
     margin: 20px auto;
     padding: 20px;
     background: var(--bg-color);
@@ -388,7 +388,7 @@ body.dark-mode .pagination button:hover {
 
 /* 高亮当前按钮样式 */
 .pagination button.active {
-    background-color: #666;
+    background-color: #444;
     /* 高亮背景色 */
     color: #fff;
     /* 高亮文字色 */
