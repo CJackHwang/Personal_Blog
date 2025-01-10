@@ -1,4 +1,5 @@
 :root {
+    /* 颜色变量 */
     --bg-color: #fff;
     /* 默认背景色 */
     --text-color: #333;
@@ -22,6 +23,7 @@
 
 body {
     font-family: 'OPPO Sans Medium', Roboto, sans-serif;
+    font-weight: 400;
     margin: 0;
     padding: 0;
     display: flex;
@@ -31,8 +33,10 @@ body {
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
     font-size: 16px;
+    line-height: normal;
 }
 
+/* 深色模式 */
 body.dark-mode {
     background-color: var(--dark-bg-color);
     color: var(--dark-text-color);
@@ -40,6 +44,7 @@ body.dark-mode {
 
 /* 头部、底部和导航样式 */
 header, footer, nav {
+    font-family: 'OPPO Sans Medium', sans-serif;
     font-weight: 300;
     padding: 40px 0;
     text-align: center;
@@ -57,6 +62,7 @@ body.dark-mode header {
 
 /* 标题样式 */
 h1, h2 {
+    font-family: 'OPPO Sans Medium', sans-serif;
     font-weight: 300;
     margin: 0;
     transition: transform 0.3s;
@@ -93,7 +99,6 @@ nav a {
     padding: 8px 15px;
     position: relative;
     transition: color 0.3s, transform 0.3s;
-    /* 动画效果 */
 }
 
 body.dark-mode nav a {
@@ -103,7 +108,6 @@ body.dark-mode nav a {
 nav a:hover {
     color: #555;
     transform: translateY(-5px);
-    /* 悬停时向上移动 */
 }
 
 nav a::after {
@@ -113,7 +117,6 @@ nav a::after {
     width: 0;
     background: #555;
     transition: width 0.3s;
-    /* 动画效果 */
     position: absolute;
     bottom: -5px;
     left: 50%;
@@ -126,7 +129,6 @@ body.dark-mode nav a::after {
 
 nav a:hover::after {
     width: 100%;
-    /* 悬停时扩展下划线 */
 }
 
 /* 切换按钮样式 */
@@ -140,7 +142,7 @@ nav a:hover::after {
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     margin-left: 20px;
     display: flex;
     align-items: center;
@@ -160,6 +162,7 @@ body.dark-mode #toggleButton {
 /* 主内容区样式 */
 main {
     flex: 1;
+    max-width: auto;
     margin: 20px auto;
     padding: 20px;
     background: var(--bg-color);
@@ -235,7 +238,7 @@ footer {
     border-radius: 12px;
     box-shadow: 0 4px 15px var(--shadow-color);
     margin-top: auto;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 body.dark-mode footer {
@@ -318,7 +321,7 @@ button:focus, a:focus {
     background-color: var(--primary-hover);
     color: var(--text-color);
     font-weight: 500;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     cursor: pointer;
 }
 
