@@ -7,7 +7,8 @@
     <meta name="keywords" content="博客, 个人, CJackHwang, 技术, 生活, 编程, Kotlin">
     <title>CJack's Blog - 技术与生活的分享</title>
     <link rel="stylesheet" href="styles.css">
-
+    <script src="js/marked.min.js"></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -15,23 +16,21 @@
         <div class="subtitle">
             98% Built by GPT4o
             <p></p>
-            <!--请不要删除这里的p标签!GPT -->
         </div>
-        <nav>
+        <nav aria-label="主导航">
             <a href="#" id="homeLink">首页</a>
             <a href="#" id="aboutLink">关于</a>
             <a href="#" id="contactLink">联系</a>
-            <button id="toggleButton" title="切换暗黑/明亮模式">&#9789</button>
+            <button id="toggleButton" title="切换暗黑/明亮模式" aria-label="切换暗黑/明亮模式">&#9789</button>
         </nav>
     </header>
 
-    <main id="postList">
+    <main id="postList" role="main">
         <!-- 文章列表将在这里生成 -->
-        <script src="js/marked.min.js"></script>
     </main>
 
-    <section id="introContent" style="display: none;">
-        <article class="intro-text" id="aboutContent">
+    <section id="introContent" style="display: none;" aria-live="polite">
+        <article class="intro-text" id="aboutContent" tabindex="0">
             <h2>关于</h2>
             <h3>关于博客</h3>
             <p>
@@ -46,7 +45,7 @@
             </p>
         </article>
 
-        <article class="intro-text" id="contactContent">
+        <article class="intro-text" id="contactContent" tabindex="0">
             <h2>联系</h2>
             <h3>您可以通过点击以下方式与我联系：</h3>
             <p>
@@ -77,8 +76,6 @@
         </div>
         <div id="translate"></div>
     </footer>
-    <!---先引入script.js再引入字体cdn--->
-    <script src="js/script.js"></script>
     <link rel="stylesheet" href="https://ik.imagekit.io/cjack/OPPO%20Sans%20Medium/result.css?updatedAt=1733565886168">
     <script src="https://res.zvo.cn/translate/translate.js"></script>
     <script>
