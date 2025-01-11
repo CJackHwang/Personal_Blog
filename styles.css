@@ -202,13 +202,14 @@ body.dark-mode .post-card, body.dark-mode .intro-text {
 }
 
 .meta {
-    color: #888;
+    color: #555555;
     font-size: 0.9em;
 }
 
 body.dark-mode .meta {
-    color: #ccc;
+    color: #e0e0e0;
 }
+
 
 footer {
     text-align: center;
