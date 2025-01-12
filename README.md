@@ -1,4 +1,6 @@
 # 🌟 CJack的个人博客
+[![Powered by Lumite](https://img.shields.io/badge/Lumite-自研框架构建-FFFFFF?style=flat)](https://github.com/CJackHwang/Lumite)
+[![萌ICP备](https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20241982-fa2484?style=flat)](https://icp.gov.moe/?keyword=20241982)
 
 欢迎访问 **CJackHwang** 的个人博客！在这里，我将分享各种文章与生活经历，探索技术的无限可能。
 
