@@ -1,5 +1,6 @@
 # CJack's Blog
 [![Powered by Lumite](https://img.shields.io/badge/Powered%20by-Lumite-FFFFFF?style=flat)](https://github.com/CJackHwang/Lumite)
+[![Deploy with Vercel](https://img.shields.io/badge/Deploy%20with-Vercel-000000?style=flat&logo=vercel)](https://vercel.com)
 [![GPL-3.0 License](https://img.shields.io/badge/license-GPL%203.0-blue.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![萌ICP备](https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20241982-fa2484?style=flat)](https://icp.gov.moe/?keyword=20241982)
 
