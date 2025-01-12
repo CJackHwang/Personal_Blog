@@ -2,6 +2,7 @@
 [![Powered by Lumite](https://img.shields.io/badge/Powered%20by-Lumite-FFFFFF?style=flat)](https://github.com/CJackHwang/Lumite)
 [![Deploy with Vercel](https://img.shields.io/badge/Deploy%20with-Vercel-000000?style=flat&logo=vercel)](https://vercel.com)
 [![GPL-3.0 License](https://img.shields.io/badge/license-GPL%203.0-blue.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/CJackHwang)
 [![萌ICP备](https://img.shields.io/badge/%E8%90%8CICP%E5%A4%87-20241982-fa2484?style=flat)](https://icp.gov.moe/?keyword=20241982)
 
 欢迎访问 **CJackHwang** 的个人博客！在这里，我将分享各种文章与生活经历，探索技术的无限可能。
