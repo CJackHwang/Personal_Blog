@@ -1,5 +1,5 @@
 # CJack's Blog
-![Lumite](https://raw.githubusercontent.com/CJackHwang/Personal_Blog/720db557dcf5a2b5f1e538ecd7b0004d5d159a5d/img/Lumite.svg)
+![Lumite](https://static.codemao.cn/pickduck/rkY-aMGPyx.svg?hash=FoLMemr9r1D-6C7pkYLClZP6_lFZ)
 
 [![Powered by Lumite](https://img.shields.io/badge/Lumite-自研框架构建-FFFFFF?style=flat&logo=data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAxOSAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMuOTc2ODEgMTMuMzVDLTcuMDgyNzQgMjQuNDA5NyA3LjY2MzMyIC04Ljc2OTA1IDE1LjAzNjQgMi4yOTA1MUMyMi40MDk1IDEzLjM1IDE1LjAzNjQgMjAuNzIzMSAxNS4wMzY0IDIwLjcyMzFDMi4xMzM2IDIwLjcyMzEgMC4yOTAyOTggMjguMDk2MiAyLjEzMzYgMjAuNzIzMUMzLjk3NjgxIDEzLjM1IDE1LjAzNjQgMjAuNzIzMSAxNS4wMzY0IDIwLjcyMzFDMTUuMDM2NCAyMC43MjMxIDE1LjAzNjQgMi4yOTA1MSAzLjk3NjgxIDEzLjM1WiIgZmlsbD0iIzFDREM5QyIvPgo8L3N2Zz4=)](https://github.com/CJackHwang/Lumite "Powered by Lumite")
 [![GitHub](https://img.shields.io/badge/GitHub-CJackHwang-100000?style=flat&logo=github&logoColor=white)](https://github.com/CJackHwang)
